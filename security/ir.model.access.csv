@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+fleet_management_workshopmanager,fleet_management.workshopmanager,fleet_management_cu.model_fleet_vehicle,fleet_group_workshopmanager,1,1,0,0
+fleet_management_driver,fleet_management.driver,fleet_management_cu.model_fleet_vehicle,fleet_group_driver,1,1,0,0

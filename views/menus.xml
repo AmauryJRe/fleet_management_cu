@@ -1,0 +1,37 @@
+<odoo>
+    <record model="ir.ui.menu" id="fleet.menu_fleet_reporting_indicative_costs">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.menu_fleet_reporting_costs">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_odometer_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_costs_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_log_contract_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_log_fuel_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_log_services_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_tag_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_service_types_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_contract_types_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <record model="ir.ui.menu" id="fleet.fleet_vehicle_state_menu">
+        <field name="active" eval="False"/>
+    </record>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="workshop_menu_act" name="Workshop" parent="fleet.fleet_vehicles" action="action_fleet_management_workshop" sequence="11" groups="fleet_group_workshopmanager,fleet.fleet_group_manager"/>
+</odoo>

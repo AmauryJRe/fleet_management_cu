@@ -1,0 +1,128 @@
+<odoo>
+    <!-- model.name inherit form view -->
+    <record id="fleet_vehicle_inherit_form" model="ir.ui.view">
+        <field name="name">fleet.vehicle.inherit.view.form</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <header position='inside'>
+                <button name="set_broken" type="object" string="Broken" attrs="{'invisible': [('state', '!=', 'in_operation')]}" groups="fleet_management_cu.fleet_group_driver"/>
+                <button name="set_broken" type="object" string="Broken" attrs="{'invisible': [('state', '=', 'in_operation')]}" groups="fleet.fleet_group_manager"/>
+                <button name="set_maintenance" type="object" string="Maintenance" attrs="{'invisible': [('state', '=', 'maintenance')]}" groups="fleet.fleet_group_manager"/>
+                <button name="set_in_operation" type="object" string="Operational" attrs="{'invisible': [('state', '=', 'in_operation')]}" groups="fleet_management_cu.fleet_group_workshopmanager"/>
+                <field name="state" widget="statusbar"/>
+            </header>
+            <xpath expr="//div[@class='oe_button_box']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="driver_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="vin_sn" position="before">
+                <field name="driver_ids" widget='many2many_tags'/>
+            </field>
+            <field name="location" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="model_year" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="vin_sn" position="after">
+                <field name="brand" readonly='1'/>
+                <field name="model" readonly='1'/>
+                <field name="description"/>
+                <field name="max_speed"/>
+                <field name="weight"/>
+                <field name="air_conditioning"/>
+            </field>
+            <xpath expr="//group[1]/group[2]" position="inside">
+                <field name="vehicle_type"/>
+                <field name="inventory_number"/>
+                <field name="engine_number"/>
+                <field name="bodywork_number"/>
+                <field name="referals"/>
+                <field name="seats"/>
+                <field name="doors"/>
+            </xpath>
+            <xpath expr="//group[2]/group[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group[2]/group[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group[1]/group[2]/div[@class='o_row']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <label for="odometer" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </label>
+            <field name="car_value" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="residual_value" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Bus" attrs="{'invisible': [('vehicle_type', 'in', ['tanker_truck', 'cargo_truk'])]}">
+                        <group>
+                            <group col="2">
+                                <field name="emergency_windows"/>
+                                <field name="passengers"/>
+                                <field name="seats" string="Seats number"/>
+                            </group>
+                            <group col="2">
+                                <field name="standing_passengers"/>
+                                <field name="reserved_seats"/>
+                                <field name="category"/>
+                            </group>
+                            <group col="2">
+                                <field name="tv" attrs="{'invisible': [('vehicle_type', '!=', 'tourism_bus')]}"/>
+                                <field name="bathroom" attrs="{'invisible': [('vehicle_type', '!=', 'tourism_bus')]}"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Trunk" attrs="{'invisible': [('vehicle_type', 'in', ['regular_bus', 'tourism_bus'])]}">
+                        <group>
+                            <field name="substance_type" attrs="{'invisible': [('vehicle_type', '!=', 'tanker_truck')]}"/>
+                            <field name="max_load" attrs="{'invisible': [('vehicle_type', '!=', 'cargo_truk')]}"/>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fleet.fleet_vehicle_action" model="ir.actions.act_window">
+        <field name="domain">[('state', 'not in', ['broken','maintenance'])]</field>
+    </record>
+
+    <!-- model.name action window -->
+    <record id="action_fleet_management_workshop" model="ir.actions.act_window">
+        <field name="name">Workshop</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fleet.vehicle</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_type">form</field>
+        <!-- <field name="groups" ref="fleet.fleet_group_user"/> -->
+        <field name="domain">[('state', 'in', ['broken','maintenance'])]</field>
+    </record>
+
+    <!-- model.name tree view -->
+    <record id="fleet_vehicle_view_tree" model="ir.ui.view">
+        <field name="name">fleet.vehicle_workshop_tree</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="inventory_number"/>
+                <field name="engine_number"/>
+                <field name="bodywork_number"/>
+                <field name="license_plate"/>
+                <field name="referals"/>
+                <field name="vehicle_type"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

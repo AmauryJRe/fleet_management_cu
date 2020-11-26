@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_fleet_management_wizard_driver_form">
+        <field name="name">fleet_management.wizard_driver_form</field>
+        <field name="model">fleet_management.wizard_driver</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="new" class="oe_highlight" string="Generate" type="object"/>
+                    <button special="cancel" string="Cancel" type="special"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fleet_management_wizard_driver" model="ir.actions.act_window">
+        <field name="name">Reporte por estados</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fleet_management.wizard_driver</field>
+        <field name="view_mode">form</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem id="fleet_management_wizard_driver_menu" name="Reporte por estados" parent="fleet.fleet_vehicles" action="action_fleet_management_wizard_driver" sequence="12" groups="fleet.fleet_group_manager"/>
+
+</odoo>
